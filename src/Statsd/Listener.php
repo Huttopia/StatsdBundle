@@ -14,7 +14,8 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
  */
 class Listener
 {
-    protected $statsdClient;
+    protected Client $statsdClient;
+    protected EventDispatcherInterface $eventDispatcher;
 
     /**
      * Construct the listener, injecting the statsd client service

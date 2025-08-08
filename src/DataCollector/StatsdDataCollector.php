@@ -25,7 +25,7 @@ class StatsdDataCollector extends DataCollector
     /**
      * Reset the data collector to initial state
      */
-    public function reset()
+    public function reset(): void
     {
         $this->statsdClients = [];
         $this->data = [
@@ -41,7 +41,7 @@ class StatsdDataCollector extends DataCollector
      */
     public function onKernelResponse($event)
     {
-        if (HttpKernelInterface::MASTER_REQUEST == $event->getRequestType()) {
+        if (HttpKernelInterface::MAIN_REQUEST == $event->getRequestType()) {
             foreach ($this->statsdClients as $clientName => $client) {
                 $clientInfo = [
                     'name' => $clientName,
@@ -84,7 +84,7 @@ class StatsdDataCollector extends DataCollector
      * @param Response   $response  The response object
      * @param \Throwable $exception An exception
      */
-    public function collect(Request $request, Response $response, \Throwable $exception = null)
+    public function collect(Request $request, Response $response, \Throwable $exception = null): void
     {
     }
 
@@ -113,7 +113,7 @@ class StatsdDataCollector extends DataCollector
      *
      * @return string data collector name
      */
-    public function getName()
+    public function getName(): string
     {
         return 'statsd';
     }
